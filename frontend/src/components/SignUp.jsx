@@ -3,6 +3,7 @@ import SubHeading from "./SubHeading";
 import InputBox from "./InputBox";
 import InputPassword from "./InputPassword";
 import Button from "./Button";
+import ButtomOption from "./ButtomOption";
 
 export default function SignUp() {
   return (
@@ -16,6 +17,7 @@ export default function SignUp() {
           <InputBox label={"Email"} placeholder={"Email"} />
           <InputPassword label={"Password"} placeholder={"Password"} />
           <Button label={"Sign Up"} />
+          <ButtomOption label={"Already have an account,"} redirect={"Log In"} to={"/login"}/>
 
         </div>
       </div>
