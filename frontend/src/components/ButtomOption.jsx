@@ -5,7 +5,7 @@ export default function ButtomOption({ label, redirect, to }) {
     <>
       <div className="text-sm flex justify-center">
         <div>{label}</div>
-        <Link className="" to={to}>
+        <Link className="underline" to={to}>
           {redirect}
         </Link>
       </div>

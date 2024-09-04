@@ -8,7 +8,7 @@ import ButtomOption from "./ButtomOption";
 export default function Card() {
   return (
     <>
-      <div className="bg-slate-300 h-screen w-screen flex justify-center p-10">
+      <div className="bg-slate-300 h-screen w-screen flex justify-center p-8">
         <div className="w-80 h-max p-2 px-4 bg-white rounded-lg text-center">
           <Heading label={"Log In"} />
           <SubHeading
