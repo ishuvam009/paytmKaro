@@ -1,13 +1,12 @@
-import { Link } from "react-router-dom";
 import Header from "./Header";
+import LandingPageCard from "../cardComponent/LandingPageCard";
 
 export default function Landing() {
   return (
     <>
       <Header />
-      <div className="flex justify-center mt-10">
-      <div className="text-center">HI Join Toay Paytm,</div>
-      <Link className="underline" to={"/signup"}>Click Here</Link>
+      <div className="pt-32">
+        <LandingPageCard />
       </div>
     </>
   );
