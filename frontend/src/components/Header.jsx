@@ -13,7 +13,7 @@ export default function Header() {
           <p className="p-5 font-semibold text-lg">Company</p>
           <p className="p-5 font-semibold text-lg">Career</p>
           <Link className="ml-auto" to={"/signup"}>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold border border-blue-700 rounded px-2 py-1">
+            <button class="bg-[#00BAF2] hover:bg-blue-700 text-white font-bold rounded-3xl px-4 py-2">
               Sign Up
             </button>
           </Link>

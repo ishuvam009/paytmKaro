@@ -1,5 +1,7 @@
 import upiLogo from "../assets/upiLogo.avif";
 import cardImage from "../assets/card1Img.avif";
+import upi2 from "../assets/upi2.png";
+import transaction from "../assets/transaction.webp";
 
 export default function LandingPageCard() {
   return (
@@ -32,17 +34,42 @@ export default function LandingPageCard() {
 
       {/* Seperate Component --> */}
 
-      <div className="w-full h-72 bg-blue-700">
+      <div className="w-full h-72 bg-[#0F4A8A]">
         <p className="font-bold text-5xl px-2 py-12 text-white">
           Book & Buy on Paytm.
         </p>
       </div>
 
       <div className="h-auto bg-slate-200 p-2">
-        <p className="text-5xl font-bold px-4 py-20">Paytm Payment Instrument</p>
-        <div className="h-64 bg-white rounded-lg mx-4 my-6 shadow-xl"></div>
+        <p className="text-5xl font-bold px-4 py-20">
+          Paytm Payment Instrument
+        </p>
 
-        <div className="h-64 bg-white rounded-lg mx-4 my-6 shadow-xl"></div>
+        <div className="h-auto bg-white rounded-lg mx-10 my-6 shadow-xl flex">
+          <div className="ml-24 pt-24 pb-24">
+            <div className="flex space-x-4">
+              <img src={upi2} alt="inr" className="w-14" />
+              <p className="font-bold text-lg">
+                UPI Money <br /> Transfer
+              </p>
+            </div>
+
+            <h1 className="text-4xl font-bold py-6">
+              Pay anyone directly <br /> from your bank <br /> account.
+            </h1>
+            <p className="text-lg py-6 font-medium">
+              Pay anyone, everywhere. Make contactless & secure <br /> payments
+              in-stores or online using Paytm UPI or <br /> directly from your Bank
+              Account. Plus, send & receive <br /> money from anyone.
+            </p>
+            <button className="text-white bg-black rounded-3xl px-4 py-2 border border-black hover:text-black hover:bg-white">Download the App</button>
+          </div>
+          <div className="ml-auto mt-24 mb-24">
+            <img src={transaction} alt="paytm" className="max-w-xl" />
+          </div>
+        </div>
+
+        <div className="h-64 bg-white rounded-lg mx-10 my-6 shadow-xl"></div>
       </div>
     </>
   );
