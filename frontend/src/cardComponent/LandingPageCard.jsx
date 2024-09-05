@@ -6,13 +6,13 @@ import transaction from "../assets/transaction.webp";
 export default function LandingPageCard() {
   return (
     <>
-      <div className="grid grid-cols-5 p-2">
+      <div className="grid grid-cols-5 px-2 py-16">
         <div className="col-span-3">
           <img className="w-20 px-2 py-6" src={upiLogo} alt="" />
           <p className="text-6xl font-semibold p-4">
             India's Most-loved Payments App
           </p>
-          <p className="text-lg font-bold p-4">
+          <p className="text-lg font-semibold p-4">
             Recharge & pay bills, book flights & movie tickets, invest in stocks
             & mutual funds, and do a lot more.
           </p>
@@ -27,8 +27,8 @@ export default function LandingPageCard() {
           </a>
         </div>
 
-        <div className="col-span-2">
-          <img className="w-96" src={cardImage} alt="" />
+        <div className="col-span-2 ml-auto">
+          <img className="max-w-lg" src={cardImage} alt=""/>
         </div>
       </div>
 
