@@ -2,6 +2,8 @@ import upiLogo from "../assets/upiLogo.avif";
 import cardImage from "../assets/card1Img.avif";
 import upi2 from "../assets/upi2.png";
 import transaction from "../assets/transaction.webp";
+import TwoDiv from "./TwoDiv";
+
 
 export default function LandingPageCard() {
   return (
@@ -10,9 +12,9 @@ export default function LandingPageCard() {
         <div className="col-span-3">
           <img className="w-20 px-2 py-6" src={upiLogo} alt="" />
           <p className="text-6xl font-semibold p-4">
-            India's Most-loved Payments App
+            Indias Most-loved Payments App
           </p>
-          <p className="text-lg font-bold p-4">
+          <p className="text-xl font-semibold p-4">
             Recharge & pay bills, book flights & movie tickets, invest in stocks
             & mutual funds, and do a lot more.
           </p>
@@ -40,8 +42,8 @@ export default function LandingPageCard() {
         </p>
       </div>
 
-      <div className="h-auto bg-slate-200 p-2">
-        <p className="text-5xl font-bold px-4 py-20">
+      <div className="h-auto bg-slate-200 px-2">
+        <p className="text-5xl font-bold px-4 pt-24 pb-4">
           Paytm Payment Instrument
         </p>
 
@@ -59,17 +61,19 @@ export default function LandingPageCard() {
             </h1>
             <p className="text-lg py-6 font-medium">
               Pay anyone, everywhere. Make contactless & secure <br /> payments
-              in-stores or online using Paytm UPI or <br /> directly from your Bank
-              Account. Plus, send & receive <br /> money from anyone.
+              in-stores or online using Paytm UPI or <br /> directly from your
+              Bank Account. Plus, send & receive <br /> money from anyone.
             </p>
-            <button className="text-white bg-black rounded-3xl px-4 py-2 border border-black hover:text-black hover:bg-white">Download the App</button>
+            <button className="text-white bg-black rounded-3xl px-4 py-2 border border-black hover:text-black hover:bg-white">
+              Download the App
+            </button>
           </div>
           <div className="ml-auto mt-24 mb-24">
             <img src={transaction} alt="paytm" className="max-w-xl" />
           </div>
         </div>
 
-        <div className="h-64 bg-white rounded-lg mx-10 my-6 shadow-xl"></div>
+        <TwoDiv />
       </div>
     </>
   );
