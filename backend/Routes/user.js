@@ -14,12 +14,16 @@ const zodUserModel = z.object({
 });
 
 router.post("/signup",async (req,res)=>{
-    const { success } = zodUserModel.safeParse(req.body);
+    const parsedData = zodUserModel.safeParse(req.body);
 
-    if(!success){
+    if(!parsedData.success){
         return res.status(411).json({
-            message: "Incorrect Inputs."
-        })
+            message: "Incorrect Inputs.",
+            errors: parsedData.error.errors.map(err => ({
+                path: err.path.join('.'),
+                message: err.message
+            }))
+        });
     }
 
     const existingUser = await User.findOne({
