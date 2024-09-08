@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Landing from "./components/Landing";
@@ -6,13 +6,14 @@ import Landing from "./components/Landing";
 export default function AppRoutes() {
   return (
     <>
-      <BrowserRouter>
+      <Router>
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" exact element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<Navigate to="/"/>}/>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </>
   );
 }
