@@ -1,58 +1,124 @@
 const express = require("express");
 require("dotenv").config();
 const { z } = require("zod");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { User } = require("../DB/db");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const zodUserModel = z.object({
-    username: z.string().trim().max(20).trim().regex(/^[a-zA-Z0-9._-]+\@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/),
-    password: z.string().min(8),
-    firstName: z.string().trim().max(20),
-    lastName: z.string().max(20).trim()
+  username: z
+    .string()
+    .trim()
+    .max(20)
+    .trim()
+    .regex(/^[a-zA-Z0-9._-]+\@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/),
+  password: z
+    .string()
+    .min(8)
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/),
+  firstName: z.string().trim().max(20),
+  lastName: z.string().max(20).trim(),
 });
 
-router.post("/signup",async (req,res)=>{
-    const parsedData = zodUserModel.safeParse(req.body);
+const zodUserLoginModel = z.object({
+  username: z
+    .string()
+    .trim()
+    .max(20)
+    .trim()
+    .regex(/^[a-zA-Z0-9._-]+\@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/),
+  password: z
+    .string()
+    .min(8)
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/),
+});
 
-    if(!parsedData.success){
-        return res.status(411).json({
-            message: "Incorrect Inputs.",
-            errors: parsedData.error.errors.map(err => ({
-                path: err.path.join('.'),
-                message: err.message
-            }))
-        });
-    }
+router.post("/signup", async (req, res) => {
+  const parsedData = zodUserModel.safeParse(req.body);
 
-    const existingUser = await User.findOne({
-        username: req.body.username
-    })
+  if (!parsedData.success) {
+    return res.status(400).json({
+      message: "Incorrect Inputs.",
+      errors: parsedData.error.errors.map((err) => ({
+        path: err.path.join("."),
+        message: err.message,
+      })),
+    });
+  }
 
-    if(existingUser){
-        res.status(411).json({
-            message: "Email alreday exist."
-        })
-    }
+  const existingUser = await User.findOne({
+    username: req.body.username,
+  });
 
-    const user = await User.create({
-        username: req.body.username,
-        password: req.body.password,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-    })
+  if (existingUser) {
+    return res.status(409).json({
+      message: "Email alreday exist.",
+    });
+  }
 
-    const userId = user._id;
+  const user = await User.create({
+    username: req.body.username,
+    password: req.body.password,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+  });
 
-    const token = jwt.sign({
-        userId
-    }, JWT_SECRET);
+  const userId = user._id;
+  const userFirstName = user.firstName;
+  const userLastName = user.lastName;
 
-    res.json({
-        message: "User created sucessfully.",
-        token: token
-    })
-})
+  const token = jwt.sign(
+    {
+      userId,
+      userFirstName,
+      userLastName
+    },
+    JWT_SECRET
+  );
 
-module.exports = router; 
+  return res.json({
+    message: "User created sucessfully.",
+    token: token,
+  });
+});
+
+router.post("/login", async (req, res) => {
+  const parseData = zodUserLoginModel.safeParse(req.body);
+
+  if (!parseData.success) {
+    res.status(400).json({
+      message: "Wrong inputs.",
+    });
+  }
+
+  const userCred = await User.findOne({
+    username: req.body.username,
+    password: req.body.password,
+  });
+
+  if (userCred) {
+    const userId = userCred._id;
+    const userFirstName = userCred.firstName;
+    const userLastName = userCred.lastName;
+
+    const token = jwt.sign(
+      {
+        userId,
+        userFirstName,
+        userLastName
+      },
+      JWT_SECRET
+    );
+
+    return res.json({
+      message: "LogIn SuccessFul",
+      token: token,
+    });
+  } else
+    return res.status(401).json({
+      message: "Error in login.",
+    });
+});
+
+module.exports = router;
