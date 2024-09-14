@@ -6,7 +6,7 @@ import transaction from "../assets/transaction.webp";
 export default function LandingPageCard() {
   return (
     <>
-      <div className="grid grid-cols-5 px-2 py-16">
+      <div className="grid grid-cols-5 px-2 py-1">
         <div className="col-span-3">
           <img className="w-20 px-2 py-6" src={upiLogo} alt="" />
           <p className="text-6xl font-semibold p-4">
@@ -74,3 +74,6 @@ export default function LandingPageCard() {
     </>
   );
 }
+
+
+
