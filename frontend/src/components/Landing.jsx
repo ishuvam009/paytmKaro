@@ -1,5 +1,6 @@
 import Header from "./Header";
 import LandingPageCard from "../cardComponent/LandingPageCard";
+import InsuranceComponent from "../cardComponent/InsuranceComponent";
 
 export default function Landing() {
   return (
@@ -7,6 +8,7 @@ export default function Landing() {
       <Header />
       <div className="pt-32">
         <LandingPageCard />
+        <InsuranceComponent />
       </div>
     </>
   );
