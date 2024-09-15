@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const { User } = require("../DB/db");
 const JWT_SECRET = process.env.JWT_SECRET;
+const authMiddleware = require("../Middleware/middleware");
 
 const zodUserModel = z.object({
   username: z
@@ -28,6 +29,13 @@ const zodUserLoginModel = z.object({
     .max(20)
     .trim()
     .regex(/^[a-zA-Z0-9._-]+\@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/),
+  password: z
+    .string()
+    .min(8)
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/),
+});
+
+const passwordChangeModel = z.object({
   password: z
     .string()
     .min(8)
@@ -72,7 +80,7 @@ router.post("/signup", async (req, res) => {
     {
       userId,
       userFirstName,
-      userLastName
+      userLastName,
     },
     JWT_SECRET
   );
@@ -106,7 +114,7 @@ router.post("/login", async (req, res) => {
       {
         userId,
         userFirstName,
-        userLastName
+        userLastName,
       },
       JWT_SECRET
     );
@@ -120,5 +128,65 @@ router.post("/login", async (req, res) => {
       message: "Error in login.",
     });
 });
+
+// router.put("/passwordchange", authMiddleware, async (req, res) => {
+
+// //Dont use this route this is incomplete.
+// //Need some logic to authenticate the user.
+//   const changedPassword = passwordChangeModel.safeParse(req.body);
+  
+//   const currentPassword =  await User.findOne({
+//     username: req.body.username,
+//     password: req.body.password,
+//   })
+
+//   if(!currentPassword){
+//     return res.status(404).json({
+//       message: "Either username or password is incorrect."
+//     })
+//   }
+
+//   if(changedPassword.data === currentPassword.password){
+//     return res.json({message: "New password is same as curent password."})
+//   } else if(!changedPassword.success){
+//     return res.status(411).json({
+//       message: "Wrong Inputs",
+//       errors: parsedData.error.errors.map((err) => ({
+//         path: err.path.join("."),
+//         message: err.message,
+//       })),
+//     })
+//   }
+
+//   else{
+
+//   }
+// });
+
+router.get("/bulk", async (req,res)=>{
+  const filter = req.query.filter || "";
+
+  const users = await User.find({
+    $or: [
+      {
+      firstName: {
+        "$regex": filter
+      }},
+      {
+        lastName: {
+          "$regex": filter
+        }
+      }]
+  })
+
+  res.json({
+    user: users.map(user =>({
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      _id: user._id,
+    }))
+  })
+})
 
 module.exports = router;
