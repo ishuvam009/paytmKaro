@@ -3,7 +3,7 @@ require("dotenv").config();
 const { z } = require("zod");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-const { User } = require("../DB/db");
+const { User, Account } = require("../DB/db");
 const JWT_SECRET = process.env.JWT_SECRET;
 const authMiddleware = require("../Middleware/middleware");
 
@@ -19,7 +19,7 @@ const zodUserModel = z.object({
     .min(8)
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/),
   firstName: z.string().trim().max(20),
-  lastName: z.string().max(20).trim(),
+  // lastName: z.string().max(20).trim(),
 });
 
 const zodUserLoginModel = z.object({
@@ -85,8 +85,14 @@ router.post("/signup", async (req, res) => {
     JWT_SECRET
   );
 
+  const account = await Account.create({
+    userId,
+    balance: 1 + Math.random() * 10000
+  })
+
   return res.json({
     message: "User created sucessfully.",
+    balance: account.balance,
     token: token,
   });
 });
