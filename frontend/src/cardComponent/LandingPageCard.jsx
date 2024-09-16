@@ -8,31 +8,34 @@ import TwoDiv from "./TwoDiv";
 export default function LandingPageCard() {
   return (
     <>
-      <div className="grid grid-cols-5 px-2 py-1">
-        <div className="col-span-3">
-          <img className="w-20 px-2 py-6" src={upiLogo} alt="" />
-          <p className="text-6xl font-semibold p-4">
-            Indias Most-loved Payments App
-          </p>
-          <p className="text-lg font-bold p-4">
-            Recharge & pay bills, book flights & movie tickets, invest in stocks
-            & mutual funds, and do a lot more.
-          </p>
-          <a
-            href="https://paytm.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button className="m-4 px-6 py-2 rounded-full border border-black text-white bg-black hover:bg-white hover:text-black">
-              Download Paytm App
-            </button>
-          </a>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-5 px-2 py-1">
+  {/* Content Section */}
+  <div className="col-span-1 md:col-span-3 flex flex-col justify-center items-start md:items-start">
+    <img className="w-16 md:w-20 px-2 py-4 md:py-6" src={upiLogo} alt="" />
+    <p className="text-3xl md:text-6xl font-semibold p-2 md:p-4">
+      Indias Most-loved Payments App
+    </p>
+    <p className="text-base md:text-lg font-bold p-2 md:p-4">
+      Recharge & pay bills, book flights & movie tickets, invest in stocks
+      & mutual funds, and do a lot more.
+    </p>
+    <a
+      href="https://paytm.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <button className="m-2 md:m-4 px-4 md:px-6 py-2 rounded-full border border-black text-white bg-black hover:bg-white hover:text-black">
+        Download Paytm App
+      </button>
+    </a>
+  </div>
 
-        <div className="col-span-2 ml-auto">
-          <img className="max-w-lg" src={cardImage} alt=""/>
-        </div>
-      </div>
+  {/* Image Section */}
+  <div className="col-span-1 md:col-span-2 flex justify-center md:justify-end mt-4 md:mt-0">
+    <img className="w-48 md:w-full max-w-lg" src={cardImage} alt="" />
+  </div>
+</div>
+
 
       {/* Seperate Component --> */}
 
