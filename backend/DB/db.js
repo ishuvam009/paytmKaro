@@ -56,7 +56,33 @@ const bankSchema = new mongoose.Schema({
   }
 });
 
+const transactionSchema = new mongoose.Schema({
+  senderId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User,
+    required: true
+  },
+
+  recipientId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User,
+    required: true
+  },
+
+  amount:{
+    type: Number,
+    required: true,
+    min: 0.01
+  },
+
+  transactionDate: {
+    type: Date,
+    default: Date.now
+  }
+})
+
 const User = mongoose.model("User", userSchema);
 const Account = mongoose.model("Account", bankSchema);
+const Transaction = mongoose.model("Transaction",transactionSchema)
 
-module.exports = { User, Account };
+module.exports = { User, Account, Transaction };
