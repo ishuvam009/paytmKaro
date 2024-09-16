@@ -59,13 +59,13 @@ const bankSchema = new mongoose.Schema({
 const transactionSchema = new mongoose.Schema({
   senderId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User,
+    ref: 'User',
     required: true
   },
 
   recipientId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User,
+    ref: 'User',
     required: true
   },
 
