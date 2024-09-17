@@ -4,13 +4,38 @@ const { default: mongoose } = require("mongoose");
 const router = express.Router();
 //Implement middleware.
 
-router.get('/balance',async (req,res)=>{
+//We have two endpoints to check user balance one is req.body another is req.query
+
+//Req.body
+router.post('/balance',async (req,res)=>{
     const account = await Account.findOne({
         userId: req.body.userId
     })
     
+    if(!account){
+        return res.status(400).json({
+            message: "Acount didnt exist"
+        })
+    }else
+    
     res.json({
         "Account Balance" : account.balance,
+    })
+})
+
+//req.query
+router.get("/get-balance",async (req,res)=>{
+    const account = await Account.findOne({
+        userId: req.query.userId
+    })
+
+    if(!account){
+        return res.status(400).json({
+            message: "Account no is invalid."
+        })
+    }else 
+    res.json({
+        "Account balance is: " : account.balance,
     })
 })
 
