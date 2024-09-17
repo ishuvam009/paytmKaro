@@ -1,9 +1,9 @@
-import Heading from "./Heading";
-import SubHeading from "./SubHeading";
-import InputBox from "./InputBox";
-import InputPassword from "./InputPassword";
-import Button from "./Button";
-import ButtomOption from "./ButtomOption";
+import Heading from "../components/Heading";
+import SubHeading from "../components/SubHeading";
+import InputBox from "../components/InputBox";
+import InputPassword from "../components/InputPassword";
+import Button from "../components/Button";
+import ButtomOption from "../components/ButtomOption";
 
 export default function SignUp() {
   return (

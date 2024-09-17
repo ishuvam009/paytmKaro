@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
-import Landing from "./components/Landing";
+import Login from "./Pages/Login";
+import SignUp from "./Pages/SignUp";
+import Landing from "./Pages/Landing";
 
 export default function AppRoutes() {
   return (
