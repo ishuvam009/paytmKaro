@@ -17,7 +17,7 @@ export default function Card() {
       method: "POST",
       data: {
         password,
-        username
+        username,
       },
     });
   };
