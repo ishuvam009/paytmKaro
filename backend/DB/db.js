@@ -51,8 +51,13 @@ const bankSchema = new mongoose.Schema({
   },
 
   balance: {
-    type: Number,
-    required: true
+    type: mongoose.Schema.Types.Decimal128,
+    required: true,
+    validate: {
+      validator: function (value) {
+        return value >= 0;
+      },
+    },
   }
 });
 

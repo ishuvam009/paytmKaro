@@ -19,7 +19,7 @@ router.post('/balance',async (req,res)=>{
     }else
     
     res.json({
-        "Account Balance" : account.balance,
+        balance: account.balance,
     })
 })
 
