@@ -36,9 +36,9 @@ export default function Dashboard() {
         <div className="p-4">
             <input type="text" className="w-full h-10 rounded-md" placeholder="Search users..."/>
         </div>
-        <div  className="flex justify-between">
+        <div className="flex justify-between p-4">
           <p>Shuvam Mandal</p>
-          <button>Send Money</button>
+          <button className="border border-black text-white bg-black">Send Money</button>
         </div>
       </div>
     </>
