@@ -174,31 +174,47 @@ router.post("/login", async (req, res) => {
 // });
 
 router.get("/bulk", async (req, res) => {
-  const filter = req.query.filter || "";
+  try {
+    const filter = req.query.filter || "";
 
-  const users = await User.find({
-    $or: [
-      {
-        firstName: {
-          $regex: filter,
-        },
-      },
-      {
-        lastName: {
-          $regex: filter,
-        },
-      },
-    ],
-  });
+    if(!filter){
+      return res.json({message: "No user found"})
+    }
 
-  res.json({
-    user: users.map((user) => ({
-      username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      _id: user._id,
-    })),
-  });
+    // Find users using their first name or last name
+    const users = await User.find({
+      $or: [
+        {
+          firstName: {
+            $regex: filter,
+            $options: "i", // Case-insensitive search
+          },
+        },
+        {
+          lastName: {
+            $regex: filter,
+            $options: "i", // Case-insensitive search
+          },
+        },
+      ],
+    });
+
+    // Return response
+    res.status(200).json({
+      user: users.map((user) => ({
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        _id: user._id,
+      })),
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 });
 
 module.exports = router;
