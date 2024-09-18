@@ -4,8 +4,24 @@ import InputBox from "../components/InputBox";
 import InputPassword from "../components/InputPassword";
 import Button from "../components/Button";
 import ButtomOption from "../components/ButtomOption";
+import { useState } from "react";
+import axios from "axios";
 
 export default function Card() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const clickFunctio = async () => {
+    await axios({
+      url: "http://localhost:3000/api/v1/user/login",
+      method: "POST",
+      data: {
+        password,
+        username
+      },
+    });
+  };
+
   return (
     <>
       <div className="bg-slate-300 h-screen w-screen flex justify-center p-8">
@@ -14,10 +30,26 @@ export default function Card() {
           <SubHeading
             label={"Enter your credentials to access your account."}
           />
-          <InputBox label={"Email"} placeholder={"Email"} />
-          <InputPassword label={"Password"} placeholder={"Password"} />
-          <Button label={"Log In"} />
-          <ButtomOption label={"Don't have an account,"} redirect={"Sign Up"} to={"/signup"}/>
+          <InputBox
+            label={"Email"}
+            placeholder={"Email"}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
+          <InputPassword
+            label={"Password"}
+            placeholder={"Password"}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <Button label={"Log In"} onClick={clickFunctio} />
+          <ButtomOption
+            label={"Don't have an account,"}
+            redirect={"Sign Up"}
+            to={"/signup"}
+          />
         </div>
       </div>
     </>

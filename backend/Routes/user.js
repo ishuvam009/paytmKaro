@@ -88,7 +88,7 @@ router.post("/signup", async (req, res) => {
   const account = await Account.create({
     userId,
     balance: 5000,
-  })
+  });
 
   return res.json({
     message: "User created sucessfully.",
@@ -101,8 +101,12 @@ router.post("/login", async (req, res) => {
   const parseData = zodUserLoginModel.safeParse(req.body);
 
   if (!parseData.success) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "Wrong inputs.",
+      errors: parseData.error.errors.map((err) => ({
+        path: err.path.join("."),
+        message: err.message,
+      })),
     });
   }
 
@@ -140,7 +144,7 @@ router.post("/login", async (req, res) => {
 // //Dont use this route this is incomplete.
 // //Need some logic to authenticate the user.
 //   const changedPassword = passwordChangeModel.safeParse(req.body);
-  
+
 //   const currentPassword =  await User.findOne({
 //     username: req.body.username,
 //     password: req.body.password,
@@ -169,30 +173,32 @@ router.post("/login", async (req, res) => {
 //   }
 // });
 
-router.get("/bulk", async (req,res)=>{
+router.get("/bulk", async (req, res) => {
   const filter = req.query.filter || "";
 
   const users = await User.find({
     $or: [
       {
-      firstName: {
-        "$regex": filter
-      }},
+        firstName: {
+          $regex: filter,
+        },
+      },
       {
         lastName: {
-          "$regex": filter
-        }
-      }]
-  })
+          $regex: filter,
+        },
+      },
+    ],
+  });
 
   res.json({
-    user: users.map(user =>({
+    user: users.map((user) => ({
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
       _id: user._id,
-    }))
-  })
-})
+    })),
+  });
+});
 
 module.exports = router;
