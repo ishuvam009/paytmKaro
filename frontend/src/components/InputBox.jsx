@@ -1,4 +1,4 @@
-export default function InputBox({ label, placeholder }) {
+export default function InputBox({ label, placeholder,onChange }) {
   return (
     <>
       <div>
@@ -7,6 +7,8 @@ export default function InputBox({ label, placeholder }) {
           type="text"
           className="w-full border border-slate-300 px-2 py-1"
           placeholder={placeholder}
+          onChange={onChange}
+          autoComplete="off"
         />
       </div>
     </>

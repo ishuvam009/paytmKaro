@@ -10,11 +10,11 @@ export default function Dashboard() {
                 url:"http://localhost:3000/api/v1/account/balance",
                 method:"POST",
                 data:{
-                    userId: "66e7d4313ff8be286511894a",
+                    userId: "66eabc276777516286dd6e64",
                 },
             })
             const response = userBalance.data.balance;
-            setBalance(response);
+            setBalance(parseFloat(response.$numberDecimal));
         };
         getData();
     },[])

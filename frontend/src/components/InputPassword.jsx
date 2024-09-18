@@ -1,4 +1,4 @@
-export default function InputPassword({ label, placeholder }) {
+export default function InputPassword({ label, placeholder,onChange, }) {
   return (
     <>
       <div className="pb-4">
@@ -7,6 +7,7 @@ export default function InputPassword({ label, placeholder }) {
           className="w-full px-2 py-1 border border-slate-300 "
           type="password"
           placeholder={placeholder}
+          onChange={onChange}
         />
       </div>
     </>
