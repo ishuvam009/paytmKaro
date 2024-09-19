@@ -15,7 +15,7 @@ export default function Dashboard() {
         url: "http://localhost:3000/api/v1/account/balance",
         method: "POST",
         data: {
-          userId: "66eabc276777516286dd6e64",
+          userId: "66ebea4ea9d4167387f63a6e",
         },
       });
       const response = userBalance.data.balance;
@@ -73,7 +73,8 @@ export default function Dashboard() {
             className="w-full h-10 rounded-md"
             placeholder="Search users..."
             onChange={(e) => {
-              setFilter(e.target.value);
+              const sanitizedValue = e.target.value.replace(/[^a-zA-Z0-9\s]/g, '');
+              setFilter(sanitizedValue);
             }}
           />
           {error && <p className="text-red-700 mt-4">{error}</p>}
