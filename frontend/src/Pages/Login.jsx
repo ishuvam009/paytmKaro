@@ -6,10 +6,13 @@ import Button from "../components/Button";
 import ButtomOption from "../components/ButtomOption";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Card() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const clickFunctio = async () => {
     const response = await axios({
@@ -23,6 +26,7 @@ export default function Card() {
 
     //storing the token in the local storage.
     localStorage.setItem("token",response.data.token);
+    navigate("/dashboard")
   };
 
   return (

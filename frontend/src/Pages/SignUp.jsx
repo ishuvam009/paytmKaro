@@ -15,7 +15,7 @@ export default function SignUp(){
 
   const handleClick = async () => {
     await axios({
-      url: "http://localhost:3000/api/v1/user/signup",
+      url: "https://paytmkaro-gcp0.onrender.com/api/v1/user/signup",
       method: "POST",
       data: {
         firstName,
