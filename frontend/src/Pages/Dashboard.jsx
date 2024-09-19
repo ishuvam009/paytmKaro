@@ -38,7 +38,7 @@ export default function Dashboard() {
         </div>
         <div className="flex justify-between p-4">
           <p>Shuvam Mandal</p>
-          <button className="border border-black text-white bg-black">Send Money</button>
+          <button className="px-2 py-1 rounded-lg text-white bg-black">Send Money</button>
         </div>
       </div>
     </>

@@ -12,7 +12,7 @@ export default function Card() {
   const [password, setPassword] = useState("");
 
   const clickFunctio = async () => {
-    await axios({
+    const response = await axios({
       url: "http://localhost:3000/api/v1/user/login",
       method: "POST",
       data: {
@@ -20,6 +20,9 @@ export default function Card() {
         username,
       },
     });
+
+    //storing the token in the local storage.
+    localStorage.setItem("token",response.data.token);
   };
 
   return (
