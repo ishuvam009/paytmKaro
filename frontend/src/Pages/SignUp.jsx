@@ -23,6 +23,7 @@ export default function SignUp(){
         username,
         password,
       },
+      
     });
   };
 
