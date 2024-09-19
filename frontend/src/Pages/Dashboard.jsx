@@ -12,7 +12,7 @@ export default function Dashboard() {
   useEffect(() => {
     const getData = async () => {
       const userBalance = await axios({
-        url: "http://localhost:3000/api/v1/account/balance",
+        url: "https://paytmkaro-gcp0.onrender.com/api/v1/account/balance",
         method: "POST",
         data: {
           userId: "66ebea4ea9d4167387f63a6e",
@@ -31,7 +31,7 @@ export default function Dashboard() {
     const fetchUserList = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/user/bulk?filter=${filter}`
+          `https://paytmkaro-gcp0.onrender.com/api/v1/user/bulk?filter=${filter}`
         );
         if (response.data.user) {
           setUsers(response.data.user);
