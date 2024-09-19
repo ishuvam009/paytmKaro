@@ -3,6 +3,7 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import Landing from "./Pages/Landing";
 import Dashboard from "./Pages/Dashboard";
+import Send from "./Pages/Send";
 
 export default function AppRoutes() {
   return (
@@ -12,8 +13,9 @@ export default function AppRoutes() {
           <Route path="/" exact element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="*" element={<Navigate to="/"/>}/>
           <Route path="/dashboard" element={<Dashboard />}/>
+          <Route path="/send" element={<Send />}/>
+          <Route path="*" element={<Navigate to="/"/>}/>
         </Routes>
       </Router>
     </>

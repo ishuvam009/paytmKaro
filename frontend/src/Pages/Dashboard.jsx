@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SendMoneyUsers from "../components/SendMoneyUsers";
 
@@ -51,6 +52,12 @@ export default function Dashboard() {
     }
   }, [filter]);
 
+  const navigate = useNavigate();
+  const handleClick = (userID,userName)=>{
+    navigate(`/send?id=${userID}&name=${userName}`)
+    
+  }
+
   return (
     <>
       <div className="w-screen h-screen bg-[#E2E8F0] pt-6">
@@ -76,6 +83,7 @@ export default function Dashboard() {
             key={user._id}
             firstname={user.firstName}
             lastname={user.lastName || ""}
+            onClick={()=>handleClick(user._id, user.firstName)}
           />
         ))}
       </div>

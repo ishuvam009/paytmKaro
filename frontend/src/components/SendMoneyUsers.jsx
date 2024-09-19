@@ -1,5 +1,6 @@
-export default function ({ firstname, lastname }) {
+export default function ({ firstname, lastname, onClick }) {
   const avatarLetter = firstname.charAt(0).toUpperCase();
+  
 
   return (
     <>
@@ -13,7 +14,7 @@ export default function ({ firstname, lastname }) {
             {lastname}
           </p>
         </div>
-        <button className="px-2 py-1 rounded-lg text-white bg-black">
+        <button className="px-2 py-1 rounded-lg text-white bg-black" onClick={onClick}>
           Send Money
         </button>
       </div>
