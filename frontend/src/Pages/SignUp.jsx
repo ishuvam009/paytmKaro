@@ -32,7 +32,7 @@ export default function SignUp() {
 
       //storing token in local Storage
       localStorage.setItem("token", response.data.token);
-      navigate("/dashboar");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       setErrorMessage("Please check your credentials.")
