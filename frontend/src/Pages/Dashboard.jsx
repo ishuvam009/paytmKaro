@@ -9,23 +9,26 @@ export default function Dashboard() {
   const [filter, setFilter] = useState("");
   const [error, setError] = useState(null);
 
+  const userId = localStorage.getItem("id");
+  const userName = localStorage.getItem("userName")
+
   useEffect(() => {
     const getData = async () => {
       const userBalance = await axios({
         url: "https://paytmkaro-gcp0.onrender.com/api/v1/account/balance",
         method: "POST",
         data: {
-          userId: "66ebea4ea9d4167387f63a6e",
+          userId: userId,
         },
       });
+      console.log('This balance code runs');
+      
       const response = userBalance.data.balance;
       setBalance(parseFloat(response.$numberDecimal));
     };
     getData();
   }, []);
 
-  //remove this userName.
-  const userName = " Shuvam";
 
   useEffect(() => {
     const fetchUserList = async () => {
