@@ -16,15 +16,16 @@ export default function Card() {
   const navigate = useNavigate();
 
   const clickFunctio = async () => {
+
     try {
-      const response = await axios({
-        url: "http://localhost:3000/api/v1/user/login",
-        method: "POST",
-        data: {
-          password,
-          username,
-        },
-      });
+    const response = await axios({
+      url: "https://paytmkaro-gcp0.onrender.com/api/v1/user/login",
+      method: "POST",
+      data: {
+        password,
+        username,
+      },
+    });
 
       //storing the token in the local storage.
       localStorage.setItem("token", response.data.token);
