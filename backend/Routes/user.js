@@ -94,6 +94,8 @@ router.post("/signup", async (req, res) => {
     message: "User created sucessfully.",
     balance: account.balance,
     token: token,
+    userId,
+    userFirstName,
   });
 });
 
@@ -101,7 +103,7 @@ router.post("/login", async (req, res) => {
   const parseData = zodUserLoginModel.safeParse(req.body);
 
   if (!parseData.success) {
-    return res.status(400).json({
+    return res.status(406).json({
       message: "Wrong inputs.",
       errors: parseData.error.errors.map((err) => ({
         path: err.path.join("."),
@@ -115,7 +117,11 @@ router.post("/login", async (req, res) => {
     password: req.body.password,
   });
 
-  if (userCred) {
+  if (!userCred) {
+    return res.status(404).json({
+      message: "Please re-Check your id and password.",
+    });
+  } else if (userCred) {
     const userId = userCred._id;
     const userFirstName = userCred.firstName;
     const userLastName = userCred.lastName;
@@ -132,6 +138,8 @@ router.post("/login", async (req, res) => {
     return res.json({
       message: "LogIn SuccessFul",
       token: token,
+      userId,
+      userFirstName,
     });
   } else
     return res.status(401).json({
@@ -177,8 +185,8 @@ router.get("/bulk", async (req, res) => {
   try {
     const filter = req.query.filter || "";
 
-    if(!filter){
-      return res.json({message: "No user found"})
+    if (!filter) {
+      return res.json({ message: "No user found" });
     }
 
     // Find users using their first name or last name

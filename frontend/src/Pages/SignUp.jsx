@@ -6,29 +6,50 @@ import Button from "../components/Button";
 import ButtomOption from "../components/ButtomOption";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function SignUp(){
+export default function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleClick = async () => {
-    await axios({
-      url: "https://paytmkaro-gcp0.onrender.com/api/v1/user/signup",
-      method: "POST",
-      data: {
-        firstName,
-        lastName,
-        username,
-        password,
-      },
-      
-    });
+    try {
+      const response = await axios({
+        url: "http://localhost:3000/api/v1/user/signup",
+        method: "POST",
+        data: {
+          firstName,
+          lastName,
+          username,
+          password,
+        },
+      });
+
+      //storing token in local Storage
+      localStorage.setItem("token", response.data.token);
+      navigate("/dashboar");
+    } catch (error) {
+      console.log(error);
+      setErrorMessage("Please check your credentials.")
+
+      setTimeout(()=>{
+        setErrorMessage("");
+      },3000)
+    }
   };
 
   return (
     <>
+      {errorMessage && (
+        <div className="fixed w-auto top-0 left-0 right-0 bg-red-500 text-white text-center p-3 z-50">
+          {errorMessage}
+        </div>
+      )}
       <div className="bg-slate-300 h-screen w-screen flex justify-center p-8">
         <div className="w-80 h-max p-2 px-4 bg-white rounded-lg text-center">
           <Heading label={"Sign Up"} />
@@ -63,4 +84,4 @@ export default function SignUp(){
       </div>
     </>
   );
-};
+}

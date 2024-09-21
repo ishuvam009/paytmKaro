@@ -11,7 +11,7 @@ export default function Send() {
 
     const handleClick = ()=>{
         axios({
-            url:"https://paytmkaro-gcp0.onrender.com/api/v1/account/transaction",
+            url:"http://localhost:3000/api/v1/account/transaction",
             method: "POST",
             data:{
                 senderId: "66ebea4ea9d4167387f63a6e",

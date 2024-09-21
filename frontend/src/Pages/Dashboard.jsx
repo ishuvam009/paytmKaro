@@ -9,29 +9,32 @@ export default function Dashboard() {
   const [filter, setFilter] = useState("");
   const [error, setError] = useState(null);
 
+  const userId = localStorage.getItem("id");
+  const userName = localStorage.getItem("userName")
+
   useEffect(() => {
     const getData = async () => {
       const userBalance = await axios({
-        url: "https://paytmkaro-gcp0.onrender.com/api/v1/account/balance",
+        url: "http://localhost:3000/api/v1/account/balance",
         method: "POST",
         data: {
-          userId: "66ebea4ea9d4167387f63a6e",
+          userId: userId,
         },
       });
+      console.log('This balance code runs');
+      
       const response = userBalance.data.balance;
       setBalance(parseFloat(response.$numberDecimal));
     };
     getData();
   }, []);
 
-  //remove this userName.
-  const userName = " Shuvam";
 
   useEffect(() => {
     const fetchUserList = async () => {
       try {
         const response = await axios.get(
-          `https://paytmkaro-gcp0.onrender.com/api/v1/user/bulk?filter=${filter}`
+          `http://localhost:3000/api/v1/user/bulk?filter=${filter}`
         );
         if (response.data.user) {
           setUsers(response.data.user);
