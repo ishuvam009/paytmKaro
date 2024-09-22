@@ -1,6 +1,7 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+const apiUrl = import.meta.env.REACT_APP_API_URL;
 
 export default function Send() {
   const [searchParams] = useSearchParams();
@@ -23,7 +24,7 @@ export default function Send() {
     setIsProcessing(true); // Disable the button while processing
     try {
       const response = await axios({
-        url: "http://localhost:3000/api/v1/account/transaction",
+        url: `${apiUrl}/api/v1/account/transaction`,
         method: "POST",
         data: {
           senderId: myId, // Your sender ID

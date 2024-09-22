@@ -37,7 +37,7 @@ export default function Dashboard() {
     const fetchUserList = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/user/bulk?filter=${filter}`
+          `${apiUrl}/api/v1/user/bulk?filter=${filter}`
         );
         if (response.data.user) {
           setUsers(response.data.user);

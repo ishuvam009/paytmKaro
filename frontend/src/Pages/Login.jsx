@@ -7,6 +7,7 @@ import ButtomOption from "../components/ButtomOption";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.REACT_APP_API_URL;
 
 export default function Card() {
   const [username, setUsername] = useState("");
@@ -19,7 +20,7 @@ export default function Card() {
 
     try {
     const response = await axios({
-      url: "http://localhost:3000/api/v1/user/login",
+      url: `${apiUrl}/api/v1/user/login`,
       method: "POST",
       data: {
         password,
