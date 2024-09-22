@@ -7,6 +7,7 @@ import ButtomOption from "../components/ButtomOption";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.REACT_APP_API_URL;
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -20,7 +21,7 @@ export default function SignUp() {
   const handleClick = async () => {
     try {
       const response = await axios({
-        url: "http://localhost:3000/api/v1/user/signup",
+        url: `${apiUrl}/api/v1/user/signup`,
         method: "POST",
         data: {
           firstName,
