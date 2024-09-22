@@ -2,6 +2,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SendMoneyUsers from "../components/SendMoneyUsers";
+const apiUrl = import.meta.env.REACT_APP_API_URL;
+
 
 export default function Dashboard() {
   const [balance, setBalance] = useState(0);
@@ -13,15 +15,17 @@ export default function Dashboard() {
   const userName = localStorage.getItem("userName");
 
   useEffect(() => {
+
     const getData = async () => {
       const userBalance = await axios({
-        url: "http://localhost:3000/api/v1/account/balance",
+        url: `${apiUrl}/api/v1/account/balance`,
         method: "POST",
         data: {
           userId: userId,
         },
       });
-      console.log("This balance code runs");
+      // console.log("This balance code runs");
+      // console.log(apiUrl)
 
       const response = userBalance.data.balance;
       setBalance(parseFloat(response.$numberDecimal));
