@@ -41,7 +41,7 @@ router.get("/get-balance", async (req, res) => {
 router.post("/transaction", async (req, res) => {
   const senderId = req.body.senderId;
   const recipientId = req.body.recipientId;
-  const amount = req.body.amount;
+  const amount = parseFloat(req.body.amount);
 
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -54,12 +54,14 @@ router.post("/transaction", async (req, res) => {
   }).session(session);
 
   if (!senderAccount || !recipientAccount) {
+    await session.endSession();
     return res.status(404).json({
       message: "Account not found.",
     });
   }
 
   if (senderAccount.balance < amount) {
+    await session.endSession();
     return res.status(400).json({
       message: "Insufficient Balnce.",
     });
@@ -76,6 +78,7 @@ router.post("/transaction", async (req, res) => {
     { userId: senderId },
     { $inc: { balance: -amount } }
   ).session(session);
+
   await Account.updateOne(
     { userId: recipientId },
     { $inc: { balance: amount } }

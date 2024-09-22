@@ -32,6 +32,8 @@ export default function SignUp() {
 
       //storing token in local Storage
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("id", response.data.userId);
+      localStorage.setItem("userName",response.data.userFirstName);
       navigate("/dashboard");
     } catch (error) {
       console.log(error);

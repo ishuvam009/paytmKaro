@@ -19,7 +19,7 @@ export default function Card() {
 
     try {
     const response = await axios({
-      url: "https://paytmkaro-gcp0.onrender.com/api/v1/user/login",
+      url: "http://localhost:3000/api/v1/user/login",
       method: "POST",
       data: {
         password,
